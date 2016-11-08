@@ -86,7 +86,16 @@ namespace LesColons
                         plateau.pop_dispo -= plateau.scierie.pop;
                         plateau.tab[i] = 5;
                         tableLayoutPanel1.Controls[i].BackgroundImage = LesColons.Properties.Resources.scirie;
-                        tableLayoutPanel1.Controls[i].BackgroundImageLayout = ImageLayout.Stretch;
+                        tableLayoutPanel1.Controls[i].BackgroundImageLayout = ImageLayout.Zoom;
+                    }
+                    if (select == 6 && plateau.or >= plateau.monu.or && plateau.bois >= plateau.monu.bois && plateau.fer >= plateau.monu.fer)
+                    {
+                        plateau.or -= plateau.monu.or;
+                        plateau.bois -= plateau.monu.bois;
+                        plateau.fer -= plateau.monu.fer;
+                        plateau.tab[i] = 6;
+                        tableLayoutPanel1.Controls[i].BackgroundImage = LesColons.Properties.Resources.monument;
+                        tableLayoutPanel1.Controls[i].BackgroundImageLayout = ImageLayout.Zoom;
                     }
                 }
             }
@@ -121,6 +130,7 @@ namespace LesColons
             public ferme ferme;
             public mine mine;
             public scierie scierie;
+            public monument monu;
             double prod_ferme;
             double prod_mine;
             double prod_scirie;
@@ -143,6 +153,7 @@ namespace LesColons
                 ferme = new ferme(10, 10, 1);
                 mine = new mine(12, 12, 1);
                 scierie = new scierie(12, 12, 1);
+                monu = new monument(100, 100, 100);
             }
             public double prodTotalFerme()
             {
@@ -153,8 +164,8 @@ namespace LesColons
                 }
                 if (pop_dispo < 0)
                 {
-                    
-                    return r * prod_ferme / (pop_dispo *(-2)* prod_ferme);
+
+                    return r * prod_ferme / (pop_dispo * (-2) * prod_ferme);
                 }
                 return r * prod_ferme;
             }
@@ -167,8 +178,8 @@ namespace LesColons
                 }
                 if (pop_dispo < 0)
                 {
-                    
-                   return r * prod_mine / (pop_dispo *(-2)* prod_mine);
+
+                    return r * prod_mine / (pop_dispo * (-2) * prod_mine);
                 }
                 return r * prod_mine;
             }
@@ -185,6 +196,15 @@ namespace LesColons
                     return r * prod_scirie / (pop_dispo * (-2) * prod_scirie);
                 }
                 return r * prod_scirie;
+            }
+            public double prodTotalMonument()
+            {
+                int r = 0;
+                for (int i = 0; i < 100; i++)
+                {
+                    if (tab[i] == 6) r++;
+                }
+                return r;
             }
         }
         class maison
@@ -241,10 +261,17 @@ namespace LesColons
                 or = or_prix;
             }
         }
-        class coordonee
+        class monument
         {
-            public int x;
-            public int y;
+            public double bois;
+            public double or;
+            public double fer;
+            public monument(double bois_prix, double or_prix, double fer_prix)
+            {
+                fer = fer_prix;
+                bois = bois_prix;
+                or = or_prix;
+            }
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
@@ -265,7 +292,7 @@ namespace LesColons
         private void timer1_Tick(object sender, EventArgs e)
         {
             plateau.date++;
-            plateau.prestige += 1;
+            plateau.prestige += 1 + 0.5 * plateau.prodTotalMonument();
             plateau.nour -= plateau.pop;
             plateau.nour += plateau.prodTotalFerme();
             plateau.pop += plateau.pop * plateau.nataliter;
@@ -274,7 +301,7 @@ namespace LesColons
             {
                 plateau.pop--;
             }
-            if (plateau.pop <0)
+            if (plateau.pop < 0)
             {
                 timer1.Stop();
                 MessageBox.Show("perdu");
@@ -309,6 +336,11 @@ namespace LesColons
         private void pictureBox106_Click(object sender, EventArgs e)
         {
             select = 5;
+        }
+
+        private void pictureBox107_Click(object sender, EventArgs e)
+        {
+            select = 6;
         }
     }
 }

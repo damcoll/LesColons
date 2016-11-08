@@ -103,6 +103,16 @@ namespace LesColons.Properties {
         /// <summary>
         ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap monument {
+            get {
+                object obj = ResourceManager.GetObject("monument", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap route {
             get {
                 object obj = ResourceManager.GetObject("route", resourceCulture);
