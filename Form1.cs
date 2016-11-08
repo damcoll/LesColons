@@ -24,11 +24,18 @@ namespace LesColons
                 tableLayoutPanel1.Controls[i].BackgroundImageLayout = ImageLayout.Stretch;
             }
 
-                label1.Text = "Bois : " + Convert.ToString(plateau.bois);
-            label2.Text = "fer : " + Convert.ToString(plateau.fer);
-            label3.Text = "nouriture : " + Convert.ToString(plateau.nour);
+            label1.Text = "Bois : " + Convert.ToString(plateau.bois);
+            label8.Text = "fer : " + Convert.ToString(plateau.fer);
+            label11.Text = "nouriture : " + Convert.ToString(plateau.nour);
             label4.Text = "or : " + Convert.ToString(plateau.or);
-            label8.Text = "Population : " + Convert.ToString(plateau.pop);
+            label2.Text = "Population : " + Convert.ToString(plateau.pop);
+            label3.Text = "jour : " + Convert.ToString(plateau.date);
+            //label12.Text = "+" + Convert.ToString(plateau.prodTotalMine());
+            label14.Text = "+" + Convert.ToString(plateau.prodTotalMine());
+            label12.Text = "+" + Convert.ToString(plateau.prodTotalFerme() - plateau.pop);
+            label17.Text = "prestige : " + Convert.ToString(plateau.prestige);
+            label16.Text = "+" + Convert.ToString(plateau.nataliter * plateau.pop);
+            label15.Text = "+" + Convert.ToString(plateau.prodTotalScirie());
             select = 0;
         }
 
@@ -54,7 +61,7 @@ namespace LesColons
                         tableLayoutPanel1.Controls[i].BackgroundImage = LesColons.Properties.Resources.route;
                         tableLayoutPanel1.Controls[i].BackgroundImageLayout = ImageLayout.Stretch;
                     }
-                    if (select == 3 && plateau.or >= plateau.ferme.or && plateau.bois >= plateau.ferme.bois && plateau.pop_dispo >= plateau.ferme.pop)
+                    if (select == 3 && plateau.or >= plateau.ferme.or && plateau.bois >= plateau.ferme.bois)
                     {
                         plateau.or -= plateau.ferme.or;
                         plateau.bois -= plateau.ferme.bois;
@@ -63,13 +70,38 @@ namespace LesColons
                         tableLayoutPanel1.Controls[i].BackgroundImage = LesColons.Properties.Resources.ferme;
                         tableLayoutPanel1.Controls[i].BackgroundImageLayout = ImageLayout.Stretch;
                     }
+                    if (select == 4 && plateau.or >= plateau.mine.or && plateau.bois >= plateau.mine.bois)
+                    {
+                        plateau.or -= plateau.mine.or;
+                        plateau.bois -= plateau.mine.bois;
+                        plateau.pop_dispo -= plateau.mine.pop;
+                        plateau.tab[i] = 4;
+                        tableLayoutPanel1.Controls[i].BackgroundImage = LesColons.Properties.Resources.mine;
+                        tableLayoutPanel1.Controls[i].BackgroundImageLayout = ImageLayout.Stretch;
+                    }
+                    if (select == 5 && plateau.or >= plateau.scierie.or && plateau.bois >= plateau.scierie.bois)
+                    {
+                        plateau.or -= plateau.scierie.or;
+                        plateau.bois -= plateau.scierie.bois;
+                        plateau.pop_dispo -= plateau.scierie.pop;
+                        plateau.tab[i] = 5;
+                        tableLayoutPanel1.Controls[i].BackgroundImage = LesColons.Properties.Resources.scirie;
+                        tableLayoutPanel1.Controls[i].BackgroundImageLayout = ImageLayout.Stretch;
+                    }
                 }
             }
             label1.Text = "Bois : " + Convert.ToString(plateau.bois);
-            label2.Text = "fer : " + Convert.ToString(plateau.fer);
-            label3.Text = "nouriture : " + Convert.ToString(plateau.nour);
+            label8.Text = "fer : " + Convert.ToString(plateau.fer);
+            label11.Text = "nouriture : " + Convert.ToString(plateau.nour);
             label4.Text = "or : " + Convert.ToString(plateau.or);
-            label8.Text = "Population : " + Convert.ToString(plateau.pop);
+            label2.Text = "Population : " + Convert.ToString(plateau.pop);
+            label3.Text = "jour : " + Convert.ToString(plateau.date);
+            //label12.Text = "+" + Convert.ToString(plateau.prodTotalMine());
+            label14.Text = "+" + Convert.ToString(plateau.prodTotalMine());
+            label12.Text = "+" + Convert.ToString(plateau.prodTotalFerme() - plateau.pop);
+            label17.Text = "prestige : " + Convert.ToString(plateau.prestige);
+            label16.Text = "+" + Convert.ToString(plateau.nataliter * plateau.pop);
+            label15.Text = "+" + Convert.ToString(plateau.prodTotalScirie());
         }
         class game
         {
@@ -80,11 +112,18 @@ namespace LesColons
             public double or;
             public double pop;
             public double pop_dispo;
+            public int date;
+            public double prestige;
+            public double nataliter;
 
             public maison maison;
             public route route;
             public ferme ferme;
+            public mine mine;
+            public scierie scierie;
             double prod_ferme;
+            double prod_mine;
+            double prod_scirie;
 
             public game()
             {
@@ -95,18 +134,57 @@ namespace LesColons
                 pop = 0;
                 pop_dispo = 0;
                 prod_ferme = 1.5;
+                prod_mine = 0.5;
+                prod_scirie = 0.5;
+                prestige = 0;
+                nataliter = 5 / 100;
                 maison = new maison(10);
                 route = new route(10);
-                ferme = new ferme(10, 10,1);
+                ferme = new ferme(10, 10, 1);
+                mine = new mine(12, 12, 1);
+                scierie = new scierie(12, 12, 1);
             }
             public double prodTotalFerme()
             {
                 int r = 0;
-                for (int i= 0; i < 100;i++)
+                for (int i = 0; i < 100; i++)
                 {
                     if (tab[i] == 3) r++;
                 }
-                return r * prod_ferme; ;
+                if (pop_dispo < 0)
+                {
+                    
+                    return r * prod_ferme / (pop_dispo *(-2)* prod_ferme);
+                }
+                return r * prod_ferme;
+            }
+            public double prodTotalMine()
+            {
+                int r = 0;
+                for (int i = 0; i < 100; i++)
+                {
+                    if (tab[i] == 4) r++;
+                }
+                if (pop_dispo < 0)
+                {
+                    
+                   return r * prod_mine / (pop_dispo *(-2)* prod_mine);
+                }
+                return r * prod_mine;
+            }
+            public double prodTotalScirie()
+            {
+                int r = 0;
+                for (int i = 0; i < 100; i++)
+                {
+                    if (tab[i] == 5) r++;
+                }
+                if (pop_dispo < 0)
+                {
+
+                    return r * prod_scirie / (pop_dispo * (-2) * prod_scirie);
+                }
+                return r * prod_scirie;
             }
         }
         class maison
@@ -139,6 +217,30 @@ namespace LesColons
                 or = prix_or;
             }
         }
+        class mine
+        {
+            public double bois;
+            public double or;
+            public double pop;
+            public mine(double bois_prix, double or_prix, double popo)
+            {
+                pop = popo;
+                bois = bois_prix;
+                or = or_prix;
+            }
+        }
+        class scierie
+        {
+            public double bois;
+            public double or;
+            public double pop;
+            public scierie(double bois_prix, double or_prix, double popo)
+            {
+                pop = popo;
+                bois = bois_prix;
+                or = or_prix;
+            }
+        }
         class coordonee
         {
             public int x;
@@ -162,18 +264,51 @@ namespace LesColons
 
         private void timer1_Tick(object sender, EventArgs e)
         {
+            plateau.date++;
+            plateau.prestige += 1;
             plateau.nour -= plateau.pop;
             plateau.nour += plateau.prodTotalFerme();
+            plateau.pop += plateau.pop * plateau.nataliter;
+            plateau.pop_dispo += plateau.pop * plateau.nataliter;
+            if (plateau.nour < 0)
+            {
+                plateau.pop--;
+            }
+            if (plateau.pop <0)
+            {
+                timer1.Stop();
+                MessageBox.Show("perdu");
+            }
+            //plateau.or += plateau.prodTotalMine();
+            plateau.fer += plateau.prodTotalMine();
+            plateau.bois += plateau.prodTotalScirie();
             label1.Text = "Bois : " + Convert.ToString(plateau.bois);
-            label2.Text = "fer : " + Convert.ToString(plateau.fer);
-            label3.Text = "nouriture : " + Convert.ToString(plateau.nour);
+            label8.Text = "fer : " + Convert.ToString(plateau.fer);
+            label11.Text = "nouriture : " + Convert.ToString(plateau.nour);
             label4.Text = "or : " + Convert.ToString(plateau.or);
-            label8.Text = "Population : " + Convert.ToString(plateau.pop);
+            label2.Text = "Population : " + Convert.ToString(plateau.pop);
+            label3.Text = "jour : " + Convert.ToString(plateau.date);
+            //label12.Text = "+" + Convert.ToString(plateau.prodTotalMine());
+            label14.Text = "+" + Convert.ToString(plateau.prodTotalMine());
+            label15.Text = "+" + Convert.ToString(plateau.prodTotalScirie());
+            label12.Text = "+" + Convert.ToString(plateau.prodTotalFerme() - plateau.pop);
+            label17.Text = "prestige : " + Convert.ToString(plateau.prestige);
+            label16.Text = "+" + Convert.ToString(plateau.nataliter * plateau.pop);
         }
 
         private void pictureBox104_Click(object sender, EventArgs e)
         {
             select = 3;
+        }
+
+        private void pictureBox105_Click(object sender, EventArgs e)
+        {
+            select = 4;
+        }
+
+        private void pictureBox106_Click(object sender, EventArgs e)
+        {
+            select = 5;
         }
     }
 }
