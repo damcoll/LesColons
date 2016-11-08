@@ -137,9 +137,9 @@ namespace LesColons
 
             public game()
             {
-                bois = 1000;
-                fer = 1000;
-                nour = 1000;
+                bois = 100;
+                fer = 100;
+                nour = 100;
                 or = 1000;
                 pop = 0;
                 pop_dispo = 0;
@@ -147,7 +147,7 @@ namespace LesColons
                 prod_mine = 0.5;
                 prod_scirie = 0.5;
                 prestige = 0;
-                nataliter = 5 / 100;
+                nataliter = 0.005;
                 maison = new maison(10);
                 route = new route(10);
                 ferme = new ferme(10, 10, 1);
@@ -292,7 +292,7 @@ namespace LesColons
         private void timer1_Tick(object sender, EventArgs e)
         {
             plateau.date++;
-            plateau.prestige += 1 + 0.5 * plateau.prodTotalMonument();
+            plateau.prestige += 0.05 + 0.5 * plateau.prodTotalMonument();
             plateau.nour -= plateau.pop;
             plateau.nour += plateau.prodTotalFerme();
             plateau.pop += plateau.pop * plateau.nataliter;
