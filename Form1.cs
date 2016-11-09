@@ -31,19 +31,7 @@ namespace LesColons
                 tableLayoutPanel1.Controls[i].BackgroundImage = LesColons.Properties.Resources.herbe;
                 tableLayoutPanel1.Controls[i].BackgroundImageLayout = ImageLayout.Stretch;
             }
-
-            label1.Text = "Bois : " + Convert.ToString(plateau.bois);
-            label8.Text = "fer : " + Convert.ToString(plateau.fer);
-            label11.Text = "nouriture : " + Convert.ToString(plateau.nour);
-            label4.Text = "or : " + Convert.ToString(plateau.or);
-            label2.Text = "Population : " + Convert.ToString(plateau.pop);
-            label3.Text = "jour : " + Convert.ToString(plateau.date);
-            //label12.Text = "+" + Convert.ToString(plateau.prodTotalMine());
-            label14.Text = "+" + Convert.ToString(plateau.prodTotalMine());
-            label12.Text = "+" + Convert.ToString(plateau.prodTotalFerme() - plateau.pop);
-            label17.Text = "prestige : " + Convert.ToString(plateau.prestige);
-            label16.Text = "+" + Convert.ToString(plateau.nataliter * plateau.pop);
-            label15.Text = "+" + Convert.ToString(plateau.prodTotalScirie());
+            aff_res();
         }
 
         private void pictureBox2_Click(object sender, EventArgs e)
@@ -54,94 +42,20 @@ namespace LesColons
                 {
                     if (plateau.tab[i] == 0)
                     {
-                        if (Form2.select == 1 && plateau.bois >= plateau.maison.bois)
-                        {
-                            plateau.bois -= plateau.maison.bois;
-                            plateau.population_max += 3;
-                            plateau.pop += 1;
-                            plateau.pop_dispo += 1;
-                            plateau.tab[i] = 1;
-                            tableLayoutPanel1.Controls[i].BackgroundImage = LesColons.Properties.Resources.maison;
-                            tableLayoutPanel1.Controls[i].BackgroundImageLayout = ImageLayout.Stretch;
-                        }
-                        if (Form2.select == 2 && plateau.or >= plateau.route.or)
-                        {
-                            plateau.or -= plateau.route.or;
-                            plateau.tab[i] = 2;
-                            tableLayoutPanel1.Controls[i].BackgroundImage = LesColons.Properties.Resources.route;
-                            tableLayoutPanel1.Controls[i].BackgroundImageLayout = ImageLayout.Stretch;
-                        }
-                        if (Form2.select == 3 && plateau.or >= plateau.ferme.or && plateau.bois >= plateau.ferme.bois)
-                        {
-                            plateau.or -= plateau.ferme.or;
-                            plateau.bois -= plateau.ferme.bois;
-                            plateau.pop_dispo -= plateau.ferme.pop;
-                            plateau.tab[i] = 3;
-                            tableLayoutPanel1.Controls[i].BackgroundImage = LesColons.Properties.Resources.ferme;
-                            tableLayoutPanel1.Controls[i].BackgroundImageLayout = ImageLayout.Stretch;
-                        }
-                        if (Form2.select == 4 && plateau.or >= plateau.mine.or && plateau.bois >= plateau.mine.bois)
-                        {
-                            plateau.or -= plateau.mine.or;
-                            plateau.bois -= plateau.mine.bois;
-                            plateau.pop_dispo -= plateau.mine.pop;
-                            plateau.tab[i] = 4;
-                            tableLayoutPanel1.Controls[i].BackgroundImage = LesColons.Properties.Resources.mine;
-                            tableLayoutPanel1.Controls[i].BackgroundImageLayout = ImageLayout.Stretch;
-                        }
-                        if (Form2.select == 5 && plateau.or >= plateau.scierie.or && plateau.bois >= plateau.scierie.bois)
-                        {
-                            plateau.or -= plateau.scierie.or;
-                            plateau.bois -= plateau.scierie.bois;
-                            plateau.pop_dispo -= plateau.scierie.pop;
-                            plateau.tab[i] = 5;
-                            tableLayoutPanel1.Controls[i].BackgroundImage = LesColons.Properties.Resources.scirie;
-                            tableLayoutPanel1.Controls[i].BackgroundImageLayout = ImageLayout.Zoom;
-                        }
-                        if (Form2.select == 6 && plateau.or >= plateau.monu.or && plateau.bois >= plateau.monu.bois && plateau.fer >= plateau.monu.fer)
-                        {
-                            plateau.or -= plateau.monu.or;
-                            plateau.bois -= plateau.monu.bois;
-                            plateau.fer -= plateau.monu.fer;
-                            plateau.tab[i] = 6;
-                            tableLayoutPanel1.Controls[i].BackgroundImage = LesColons.Properties.Resources.monument;
-                            tableLayoutPanel1.Controls[i].BackgroundImageLayout = ImageLayout.Zoom;
-                        }
-                        if (Form2.select == 7 && plateau.or >= plateau.ecole.or && plateau.bois >= plateau.ecole.bois && plateau.fer >= plateau.ecole.fer)
-                        {
-                            plateau.or -= plateau.ecole.or;
-                            plateau.technologie += plateau.prod_ecole;
-                            plateau.bois -= plateau.ecole.bois;
-                            plateau.fer -= plateau.ecole.fer;
-                            plateau.tab[i] = 7;
-                            tableLayoutPanel1.Controls[i].BackgroundImage = LesColons.Properties.Resources.ecole;
-                            tableLayoutPanel1.Controls[i].BackgroundImageLayout = ImageLayout.Zoom;
-                        }
-                        if (Form2.select == 8 && plateau.or >= plateau.entrepos.or && plateau.bois >= plateau.entrepos.bois && plateau.fer >= plateau.entrepos.fer)
-                        {
-                            plateau.or -= plateau.entrepos.or;
-                            plateau.fer_max += plateau.entrepos.stock_fer;
-                            plateau.bois_max += plateau.entrepos.stock_bois;
-                            plateau.bois -= plateau.entrepos.bois;
-                            plateau.fer -= plateau.entrepos.fer;
-                            plateau.tab[i] = 8;
-                            tableLayoutPanel1.Controls[i].BackgroundImage = LesColons.Properties.Resources.entrepos;
-                            tableLayoutPanel1.Controls[i].BackgroundImageLayout = ImageLayout.Zoom;
-                        }
-                        if (Form2.select == 9 && plateau.or >= plateau.gardeManger.or && plateau.bois >= plateau.gardeManger.bois && plateau.fer >= plateau.gardeManger.fer)
-                        {
-                            plateau.or -= plateau.gardeManger.or;
-                            plateau.nour_max += plateau.gardeManger.stock_nour;
-                            plateau.bois -= plateau.gardeManger.bois;
-                            plateau.fer -= plateau.gardeManger.fer;
-                            plateau.tab[i] = 9;
-                            tableLayoutPanel1.Controls[i].BackgroundImage = LesColons.Properties.Resources.gardeManger;
-                            tableLayoutPanel1.Controls[i].BackgroundImageLayout = ImageLayout.Zoom;
-                        }
+                        if (Form2.select == 1) creeMaison(i);
+
+                        if (Form2.select == 2) creeRoute(i);
+                        if (Form2.select == 3) creeFerme(i);
+                        if (Form2.select == 4) creeMine(i);
+                        if (Form2.select == 5) creeScirie(i);
+                        if (Form2.select == 6) creeMonument(i);
+                        if (Form2.select == 7) creeEcole(i);
+                        if (Form2.select == 8) creeEntrepos(i);
+                        if (Form2.select == 9) creeGardeManger(i);
                     }
                     else
                     {
-                        if (plateau.tab[i] == 1 && plateau.tech.habitationI == 10)
+                        if (plateau.tab[i] == 1 && plateau.tech.habitationI >= 10)
                         {
                             Form4 form4 = new Form4();
                             form4.Show();
@@ -151,43 +65,143 @@ namespace LesColons
                     }
                 }
             }
-            label1.Text = "Bois : " + Convert.ToString(plateau.bois);
-            label8.Text = "fer : " + Convert.ToString(plateau.fer);
-            label11.Text = "nouriture : " + Convert.ToString(plateau.nour);
-            label4.Text = "or : " + Convert.ToString(plateau.or);
-            label2.Text = "Population : " + Convert.ToString(plateau.pop);
-            label3.Text = "jour : " + Convert.ToString(plateau.date);
-            //label12.Text = "+" + Convert.ToString(plateau.prodTotalMine());
-            label14.Text = "+" + Convert.ToString(plateau.prodTotalMine());
-            label12.Text = "+" + Convert.ToString(plateau.prodTotalFerme() - plateau.pop);
-            label17.Text = "prestige : " + Convert.ToString(plateau.prestige);
-            label16.Text = "+" + Convert.ToString(plateau.nataliter * plateau.pop);
-            label15.Text = "+" + Convert.ToString(plateau.prodTotalScirie());
+
         }
-        
+
+        private void creeGardeManger(int i)
+        {
+            if (plateau.tab[i] == 0 && compRes(plateau.res_base, plateau.gardeManger.res))
+            {
+                sousRes(plateau.res_base, plateau.gardeManger.res);
+                plateau.res_max.nouriture += plateau.gardeManger.res_max.nouriture;
+                plateau.tab[i] = 9;
+                tableLayoutPanel1.Controls[i].BackgroundImage = LesColons.Properties.Resources.gardeManger;
+                tableLayoutPanel1.Controls[i].BackgroundImageLayout = ImageLayout.Zoom;
+            }
+        }
+
+        private void creeEntrepos(int i)
+        {
+            if (plateau.tab[i] == 0 && compRes(plateau.res_base, plateau.entrepos.res))
+            {
+                sousRes(plateau.res_base, plateau.entrepos.res);
+                plateau.tab[i] = 8;
+                plateau.res_max.fer += plateau.gardeManger.res_max.fer ;
+                plateau.res_max.bois += plateau.gardeManger.res_max.bois;
+                tableLayoutPanel1.Controls[i].BackgroundImage = LesColons.Properties.Resources.entrepos;
+                tableLayoutPanel1.Controls[i].BackgroundImageLayout = ImageLayout.Zoom;
+            }
+        }
+
+        private void creeEcole(int i)
+        {
+            if (plateau.tab[i] == 0 && compRes(plateau.res_base, plateau.ecole.res))
+            {
+                sousRes(plateau.res_base, plateau.ecole.res);
+                plateau.tab[i] = 7;
+                plateau.technologie += plateau.ecole.prod_ecole;
+                tableLayoutPanel1.Controls[i].BackgroundImage = LesColons.Properties.Resources.ecole;
+                tableLayoutPanel1.Controls[i].BackgroundImageLayout = ImageLayout.Zoom;
+            }
+        }
+
+        private void creeMonument(int i)
+        {
+            if (plateau.tab[i] == 0 && compRes(plateau.res_base, plateau.monu.res))
+            {
+                sousRes(plateau.res_base, plateau.monu.res);
+                plateau.tab[i] = 6;
+                tableLayoutPanel1.Controls[i].BackgroundImage = LesColons.Properties.Resources.monument;
+                tableLayoutPanel1.Controls[i].BackgroundImageLayout = ImageLayout.Zoom;
+            }
+        }
+
+        private void creeScirie(int i)
+        {
+            if (plateau.tab[i] == 0 && compRes(plateau.res_base, plateau.scierie.res))
+            {
+                sousRes(plateau.res_base, plateau.scierie.res);
+
+                plateau.tab[i] = 5;
+                tableLayoutPanel1.Controls[i].BackgroundImage = LesColons.Properties.Resources.scirie;
+                tableLayoutPanel1.Controls[i].BackgroundImageLayout = ImageLayout.Zoom;
+            }
+        }
+
+        private void creeMine(int i)
+        {
+            if (plateau.tab[i] == 0 && compRes(plateau.res_base, plateau.mine.res))
+            {
+                sousRes(plateau.res_base, plateau.mine.res);
+                plateau.tab[i] = 4;
+                tableLayoutPanel1.Controls[i].BackgroundImage = LesColons.Properties.Resources.mine;
+                tableLayoutPanel1.Controls[i].BackgroundImageLayout = ImageLayout.Zoom;
+            }
+        }
+
+        private void creeFerme(int i)
+        {
+            if (plateau.tab[i] == 0 && compRes(plateau.res_base, plateau.ferme.res))
+            {
+                sousRes(plateau.res_base, plateau.ferme.res);
+                plateau.tab[i] = 3;
+                tableLayoutPanel1.Controls[i].BackgroundImage = LesColons.Properties.Resources.ferme;
+                tableLayoutPanel1.Controls[i].BackgroundImageLayout = ImageLayout.Zoom;
+            }
+        }
+
+        private void creeRoute(int i)
+        {
+            if (plateau.tab[i] == 0 && compRes(plateau.res_base, plateau.route.res))
+            {
+                sousRes(plateau.res_base, plateau.route.res);
+                plateau.tab[i] = 2;
+                tableLayoutPanel1.Controls[i].BackgroundImage = LesColons.Properties.Resources.route;
+                tableLayoutPanel1.Controls[i].BackgroundImageLayout = ImageLayout.Zoom;
+            }
+        }
+
+        private void creeMaison(int i)
+        {
+            if (plateau.tab[i] == 0 && compRes(plateau.res_base, plateau.maison.res))
+            {
+                sousRes(plateau.res_base, plateau.maison.res);
+                plateau.pop += 1;
+                plateau.population_max += 2;
+                plateau.pop_dispo += 1;
+                plateau.tab[i] = 1;
+                tableLayoutPanel1.Controls[i].BackgroundImage = LesColons.Properties.Resources.maison;
+                tableLayoutPanel1.Controls[i].BackgroundImageLayout = ImageLayout.Zoom;
+            }
+        }
+
+        private void sousRes(ressource r1, ressource r2)
+        {
+            r1.bois -= r2.bois;
+            r1.fer -= r2.fer;
+            r1.or -= r2.or;
+            r1.nouriture -= r2.nouriture;
+        }
+
+        private bool compRes(ressource r1, ressource r2)
+        {
+            if (r1.bois >= r2.bois && r1.fer >= r2.fer && r1.or >= r2.or && r1.nouriture >= r2.nouriture) return true;
+            return false;
+        }
 
         class game
         {
             public int[] tab = new int[100];
-            public double bois;
-            public double fer;
-            public double nour;
-            public double or;
             public double pop;
             public double pop_dispo;
-            public double prod_ecole;
+
             public int date;
             public double prestige;
             public double nataliter;
             public double technologie;
             public double bonheur;
             public double population_max;
-            public double bois_max;
-            public double fer_max;
-            public double nour_max;
-            public double or_max;
 
-            public int technologie_select;
             public gardeManger gardeManger;
             public entrepos entrepos;
             public maison maison;
@@ -199,32 +213,28 @@ namespace LesColons
             public ecole ecole;
             public technologie tech;
             public maison2 maison2;
-            double prod_ferme;
-            double prod_mine;
-            double prod_scirie;
+
+
+
+            public ressource res_base;
+            public ressource res_max;
 
             public game()
             {
-                bois = 100;
-                fer = 100;
-                nour = 100;
-                or = 1000;
+
                 pop = 0;
                 pop_dispo = 0;
-                prod_ferme = 1.5;
-                prod_mine = 0.5;
-                prod_scirie = 0.5;
-                prod_ecole = 0.5;
+
+
+
+
                 prestige = 0;
                 nataliter = 0.005;
                 bonheur = 0;
                 technologie = 0;
                 population_max = 0;
-                or_max = 1000;
-                fer_max = 100;
-                bois_max = 100;
-                nour_max = 100;
-                technologie_select = 0;
+                res_base = new ressource(100, 100, 1000, 100);
+                res_max = new ressource(100, 100, 1000, 100);
                 maison = new maison(10);
                 route = new route(10);
                 ferme = new ferme(10, 10, 1);
@@ -247,9 +257,9 @@ namespace LesColons
                 if (pop_dispo < 0)
                 {
 
-                    return r * prod_ferme / (pop_dispo * (-2) * prod_ferme);
+                    return r * ferme.prod_ferme / (pop_dispo * (-2) * ferme.prod_ferme);
                 }
-                return r * prod_ferme;
+                return r * ferme.prod_ferme;
             }
             public double prodTotalMine()
             {
@@ -261,9 +271,9 @@ namespace LesColons
                 if (pop_dispo < 0)
                 {
 
-                    return r * prod_mine / (pop_dispo * (-2) * prod_mine);
+                    return r * mine.prod_mine / (pop_dispo * (-2) * mine.prod_mine);
                 }
-                return r * prod_mine;
+                return r * mine.prod_mine;
             }
             public double prodTotalScirie()
             {
@@ -275,9 +285,9 @@ namespace LesColons
                 if (pop_dispo < 0)
                 {
 
-                    return r * prod_scirie / (pop_dispo * (-2) * prod_scirie);
+                    return r * scierie.prod_scirie / (pop_dispo * (-2) * scierie.prod_scirie);
                 }
-                return r * prod_scirie;
+                return r * scierie.prod_scirie;
             }
             public double prodTotalMonument()
             {
@@ -291,121 +301,104 @@ namespace LesColons
         }
         class maison
         {
-            public double bois;
+            public ressource res;
 
             public maison(double prix_bois)
             {
-                bois = prix_bois;
+                res = new ressource(prix_bois, 0, 0, 0);
             }
         }
         class maison2
         {
-            public double bois;
+            public ressource res;
 
             public maison2(double prix_bois)
             {
-                bois = prix_bois;
+                res = new ressource(prix_bois, 0, 0, 0);
             }
         }
         class ferme
         {
-            public double bois;
-            public double or;
-            public double pop;
+            public double prod_ferme;
+            public ressource res;
+            double pop;
             public ferme(double bois_prix, double or_prix, double popo)
             {
+                res = new ressource(bois_prix, 0, or_prix, 0);
                 pop = popo;
-                bois = bois_prix;
-                or = or_prix;
+                prod_ferme = 1.5;
             }
         }
         class route
         {
-            public double or;
-
+            public ressource res;
             public route(double prix_or)
             {
-                or = prix_or;
+                res = new ressource(0, 0, prix_or, 0);
             }
         }
         class mine
         {
-            public double bois;
-            public double or;
+            public double prod_mine;
+            public ressource res;
             public double pop;
             public mine(double bois_prix, double or_prix, double popo)
             {
+                res = new ressource(bois_prix, 0, or_prix, 0);
+                prod_mine = 0.5;
                 pop = popo;
-                bois = bois_prix;
-                or = or_prix;
             }
         }
         class scierie
         {
-            public double bois;
-            public double or;
+            public double prod_scirie;
+            public ressource res;
             public double pop;
             public scierie(double bois_prix, double or_prix, double popo)
             {
                 pop = popo;
-                bois = bois_prix;
-                or = or_prix;
+                res = new ressource(bois_prix, 0, or_prix, 0);
+                prod_scirie = 0.5;
             }
         }
         class monument
         {
-            public double bois;
-            public double or;
-            public double fer;
+            public ressource res;
             public monument(double bois_prix, double or_prix, double fer_prix)
             {
-                fer = fer_prix;
-                bois = bois_prix;
-                or = or_prix;
+                res = new ressource(bois_prix, fer_prix, or_prix, 0);
             }
         }
         class ecole
         {
-            public double bois;
-            public double or;
-            public double fer;
+            public double prod_ecole;
+            public ressource res;
             public ecole(double bois_prix, double or_prix, double fer_prix)
             {
-                fer = fer_prix;
-                bois = bois_prix;
-                or = or_prix;
+                res = new ressource(bois_prix, fer_prix, or_prix, 0);
+                prod_ecole = 0.5;
             }
         }
         class entrepos
         {
-            public double bois;
-            public double or;
-            public double fer;
+            public ressource res;
 
-            public double stock_fer;
-            public double stock_bois;
+            public ressource res_max;
             public entrepos(double bois_prix, double or_prix, double fer_prix)
             {
-                fer = fer_prix;
-                bois = bois_prix;
-                or = or_prix;
-                stock_bois = 50;
-                stock_fer = 50;
+                res = new ressource(bois_prix, fer_prix, or_prix, 0);
+                res_max = new ressource(50, 50, 0, 0);
             }
         }
         class gardeManger
         {
-            public double bois;
-            public double or;
-            public double fer;
+            public ressource res;
 
-            public double stock_nour;
+            public ressource res_max;
             public gardeManger(double bois_prix, double or_prix, double fer_prix)
             {
-                fer = fer_prix;
-                bois = bois_prix;
-                or = or_prix;
-                stock_nour = 50;
+                res = new ressource(bois_prix, fer_prix, or_prix, 0);
+                res_max = new ressource(0, 0, 0, 50);
             }
         }
         class technologie
@@ -423,18 +416,25 @@ namespace LesColons
                 habitationI = 0;
             }
         }
-
+        class ressource
+        {
+            public double bois;
+            public double fer;
+            public double or;
+            public double nouriture;
+            public ressource(double b, double f, double o, double n)
+            {
+                bois = b;
+                fer = f;
+                or = o;
+                nouriture = n;
+            }
+        }
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            plateau.date++;
-            plateau.prestige += 0.05 * plateau.bonheur + 0.5 * plateau.prodTotalMonument();
-            plateau.nour -= plateau.pop;
-            plateau.nour += plateau.prodTotalFerme();
-            plateau.pop += plateau.pop * plateau.nataliter;
-            plateau.pop_dispo += plateau.pop * plateau.nataliter;
-            plateau.bonheur += calcul_bonheur();
-            if (plateau.nour < 0)
+            
+            if (plateau.res_base.nouriture < 0)
             {
                 plateau.pop--;
             }
@@ -444,25 +444,8 @@ namespace LesColons
                 MessageBox.Show("perdu");
             }
             evolution_tech();
-            if (plateau.nour > plateau.nour_max) plateau.nour = plateau.nour_max;
-            if (plateau.or > plateau.or_max) plateau.or = plateau.or_max;
-            if (plateau.bois > plateau.bois_max) plateau.bois = plateau.bois_max;
-            if (plateau.fer > plateau.fer_max) plateau.fer = plateau.fer_max;
-            //plateau.or += plateau.prodTotalMine();
-            plateau.fer += plateau.prodTotalMine();
-            plateau.bois += plateau.prodTotalScirie();
-            label1.Text = "Bois : " + Convert.ToString(plateau.bois);
-            label8.Text = "fer : " + Convert.ToString(plateau.fer);
-            label11.Text = "nouriture : " + Convert.ToString(plateau.nour);
-            label4.Text = "or : " + Convert.ToString(plateau.or);
-            label2.Text = "Population : " + Convert.ToString(plateau.pop);
-            label3.Text = "jour : " + Convert.ToString(plateau.date);
-            //label12.Text = "+" + Convert.ToString(plateau.prodTotalMine());
-            label14.Text = "+" + Convert.ToString(plateau.prodTotalMine());
-            label15.Text = "+" + Convert.ToString(plateau.prodTotalScirie());
-            label12.Text = "+" + Convert.ToString(plateau.prodTotalFerme() - plateau.pop);
-            label17.Text = "prestige : " + Convert.ToString(plateau.prestige);
-            label16.Text = "+" + Convert.ToString(plateau.nataliter * plateau.pop);
+            evolution_resource();
+            aff_res();
         }
 
         public void evolution_tech()
@@ -470,11 +453,29 @@ namespace LesColons
             if (plateau.tech.educationI == 10) Form3.label1.BackColor = Color.Blue;
             if (plateau.tech.comerceI == 10) Form3.label3.BackColor = Color.Blue;
             if (plateau.tech.agricultureI == 10) Form3.label5.BackColor = Color.Blue;
-            if (plateau.tech.educationI == 10) Form3.label6.BackColor = Color.Blue;
+            if (plateau.tech.habitationI == 10) Form3.label6.BackColor = Color.Blue;
             if (Form3.select == 1) plateau.tech.educationI += plateau.technologie;
             else if (Form3.select == 2) plateau.tech.comerceI += plateau.technologie;
             else if (Form3.select == 3) plateau.tech.agricultureI += plateau.technologie;
             else if (Form3.select == 4) plateau.tech.habitationI += plateau.technologie;
+        }
+        public void evolution_resource()
+        {
+            plateau.date++;
+            plateau.prestige += 0.05 * plateau.bonheur + 0.5 * plateau.prodTotalMonument();
+            plateau.res_base.nouriture -= plateau.pop;
+            plateau.res_base.nouriture += plateau.prodTotalFerme();
+            plateau.pop += plateau.pop * plateau.nataliter;
+            plateau.pop_dispo += plateau.pop * plateau.nataliter;
+            plateau.bonheur += calcul_bonheur();
+            plateau.res_base.fer += plateau.prodTotalMine();
+            plateau.res_base.bois += plateau.prodTotalScirie();
+            if (plateau.res_base.nouriture > plateau.res_max.nouriture) plateau.res_base.nouriture = plateau.res_max.nouriture;
+            if (plateau.res_base.or > plateau.res_max.or) plateau.res_base.or = plateau.res_max.or;
+            if (plateau.res_base.bois > plateau.res_max.bois) plateau.res_base.bois = plateau.res_max.bois;
+            if (plateau.res_base.fer > plateau.res_max.fer) plateau.res_base.fer = plateau.res_max.fer;
+            //plateau.or += plateau.prodTotalMine();
+            
         }
 
         public double calcul_bonheur()
@@ -488,6 +489,22 @@ namespace LesColons
             return indice * plateau.pop;
         }
 
+        public void aff_res()
+        {
+            label1.Text = "Bois : " + Convert.ToString(plateau.res_base.bois);
+            label8.Text = "fer : " + Convert.ToString(plateau.res_base.fer);
+            label11.Text = "nouriture : " + Convert.ToString(plateau.res_base.nouriture);
+            label4.Text = "or : " + Convert.ToString(plateau.res_base.or);
+            label2.Text = "Population : " + Convert.ToString(plateau.pop);
+            label3.Text = "jour : " + Convert.ToString(plateau.date);
+            //label12.Text = "+" + Convert.ToString(plateau.prodTotalMine());
+            label14.Text = "+" + Convert.ToString(plateau.prodTotalMine());
+            label12.Text = "+" + Convert.ToString(plateau.prodTotalFerme() - plateau.pop);
+            label17.Text = "prestige : " + Convert.ToString(plateau.prestige);
+            label16.Text = "+" + Convert.ToString(plateau.nataliter * plateau.pop);
+            label15.Text = "+" + Convert.ToString(plateau.prodTotalScirie());
+            label16.Text = "+" + Convert.ToString(plateau.nataliter * plateau.pop);
+        }
 
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
@@ -497,6 +514,7 @@ namespace LesColons
 
         private void timer2_Tick(object sender, EventArgs e)
         {
+            label5.Text = Convert.ToString(Form3.select);
             if (plateau.tab[cas_modifier] == 1)
             {
                 if (Form4.select == 1)
