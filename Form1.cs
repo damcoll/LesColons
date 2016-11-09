@@ -52,6 +52,7 @@ namespace LesColons
                         if (Form2.select == 7) creeEcole(i);
                         if (Form2.select == 8) creeEntrepos(i);
                         if (Form2.select == 9) creeGardeManger(i);
+                       // if ()
                     }
                     else
                     {
@@ -404,9 +405,13 @@ namespace LesColons
         class technologie
         {
             public double educationI;
+            public bool educationI_bool;
             public double comerceI;
+            public bool comerceI_bool;
             public double agricultureI;
+            public bool agricultureI_bool;
             public double habitationI;
+            public bool habitationI_bool;
 
             public technologie()
             {
@@ -414,6 +419,10 @@ namespace LesColons
                 comerceI = 0;
                 agricultureI = 0;
                 habitationI = 0;
+                educationI_bool = false;
+                comerceI_bool = false;
+                agricultureI_bool = false;
+                habitationI_bool = false;
             }
         }
         class ressource
@@ -450,10 +459,34 @@ namespace LesColons
 
         public void evolution_tech()
         {
-            if (plateau.tech.educationI == 10) Form3.label1.BackColor = Color.Blue;
-            if (plateau.tech.comerceI == 10) Form3.label3.BackColor = Color.Blue;
-            if (plateau.tech.agricultureI == 10) Form3.label5.BackColor = Color.Blue;
-            if (plateau.tech.habitationI == 10) Form3.label6.BackColor = Color.Blue;
+            if (plateau.tech.educationI >= 10 && !plateau.tech.habitationI_bool)
+            {
+                Form3.label1.BackColor = Color.Blue;
+                MessageBox.Show("technologie terminer");
+                Form3.select = 2;
+                plateau.tech.habitationI_bool = true;
+            }
+            if (plateau.tech.comerceI >= 10 && !plateau.tech.comerceI_bool)
+            {
+                Form3.label3.BackColor = Color.Blue;
+                MessageBox.Show("technologie terminer");
+                Form3.select = 3;
+                plateau.tech.comerceI_bool = true;
+            }
+            if (plateau.tech.agricultureI >= 10 && !plateau.tech.agricultureI_bool)
+            {
+                Form3.label5.BackColor = Color.Blue;
+                MessageBox.Show("technologie terminer");
+                Form3.select = 4;
+                plateau.tech.agricultureI_bool = true;
+            }
+            if (plateau.tech.habitationI >= 10 && !plateau.tech.habitationI_bool)
+            {
+                Form3.label6.BackColor = Color.Blue;
+                MessageBox.Show("technologie terminer");
+                Form3.select = 5;
+                plateau.tech.habitationI_bool = true;
+            }
             if (Form3.select == 1) plateau.tech.educationI += plateau.technologie;
             else if (Form3.select == 2) plateau.tech.comerceI += plateau.technologie;
             else if (Form3.select == 3) plateau.tech.agricultureI += plateau.technologie;
@@ -514,7 +547,6 @@ namespace LesColons
 
         private void timer2_Tick(object sender, EventArgs e)
         {
-            label5.Text = Convert.ToString(Form3.select);
             if (plateau.tab[cas_modifier] == 1)
             {
                 if (Form4.select == 1)
