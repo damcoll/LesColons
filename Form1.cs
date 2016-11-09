@@ -13,9 +13,10 @@ namespace LesColons
 
     public partial class Form1 : Form
     {
-        game plateau;
+        public game plateau;
         Form3 Form3;
         Form2 Form2;
+        Form5 Form5;
         int cas_modifier;
         public Form1(int co = 0)
         {
@@ -23,8 +24,6 @@ namespace LesColons
 
             Form2 = new Form2(0);
             Form2.Show();
-            Form3 = new Form3();
-            Form3.Show();
             Form2.select = 0;
             plateau = new game();
             for (int i = 0; i < 100; i++)
@@ -89,7 +88,7 @@ namespace LesColons
             {
                 sousRes(plateau.res_base, plateau.entrepos.res);
                 plateau.tab[i] = 8;
-                plateau.res_max.fer += plateau.gardeManger.res_max.fer ;
+                plateau.res_max.fer += plateau.gardeManger.res_max.fer;
                 plateau.res_max.bois += plateau.gardeManger.res_max.bois;
                 tableLayoutPanel1.Controls[i].BackgroundImage = LesColons.Properties.Resources.entrepos;
                 tableLayoutPanel1.Controls[i].BackgroundImageLayout = ImageLayout.Zoom;
@@ -206,7 +205,7 @@ namespace LesColons
             return false;
         }
 
-        class game
+        public class game
         {
             public int[] tab = new int[100];
             public double pop;
@@ -274,7 +273,7 @@ namespace LesColons
                 }
                 if (pop_dispo < 0)
                 {
-                    if ((r * ferme.prod_ferme / (pop_dispo * -2 * ferme.prod_ferme) < 0))return 0;
+                    if ((r * ferme.prod_ferme / (pop_dispo * -2 * ferme.prod_ferme) < 0)) return 0;
                     return r * ferme.prod_ferme / (pop_dispo * -2 * ferme.prod_ferme);
                 }
                 return r * ferme.prod_ferme;
@@ -288,7 +287,7 @@ namespace LesColons
                 }
                 if (pop_dispo < 0)
                 {
-                    if (r * mine.prod_mine / (pop_dispo * -2 * mine.prod_mine) < 0)return 0 ;
+                    if (r * mine.prod_mine / (pop_dispo * -2 * mine.prod_mine) < 0) return 0;
                     return r * mine.prod_mine / (pop_dispo * -2 * mine.prod_mine);
                 }
                 return r * mine.prod_mine;
@@ -326,7 +325,7 @@ namespace LesColons
                 return r * mag.prod_mag;
             }
         }
-        class maison
+        public class maison
         {
             public ressource res;
 
@@ -335,7 +334,7 @@ namespace LesColons
                 res = new ressource(prix_bois, 0, 0, 0);
             }
         }
-        class maison2
+        public class maison2
         {
             public ressource res;
 
@@ -344,7 +343,7 @@ namespace LesColons
                 res = new ressource(prix_bois, 0, 0, 0);
             }
         }
-        class ferme
+        public class ferme
         {
             public double prod_ferme;
             public ressource res;
@@ -356,7 +355,7 @@ namespace LesColons
                 prod_ferme = 1.5;
             }
         }
-        class route
+        public class route
         {
             public ressource res;
             public route(double prix_or)
@@ -364,7 +363,7 @@ namespace LesColons
                 res = new ressource(0, 0, prix_or, 0);
             }
         }
-        class mine
+        public class mine
         {
             public double prod_mine;
             public ressource res;
@@ -376,7 +375,7 @@ namespace LesColons
                 pop = popo;
             }
         }
-        class scierie
+        public class scierie
         {
             public double prod_scirie;
             public ressource res;
@@ -388,7 +387,7 @@ namespace LesColons
                 prod_scirie = 0.5;
             }
         }
-        class monument
+        public class monument
         {
             public ressource res;
             public monument(double bois_prix, double or_prix, double fer_prix)
@@ -396,7 +395,7 @@ namespace LesColons
                 res = new ressource(bois_prix, fer_prix, or_prix, 0);
             }
         }
-        class ecole
+        public class ecole
         {
             public double prod_ecole;
             public ressource res;
@@ -406,7 +405,7 @@ namespace LesColons
                 prod_ecole = 0.5;
             }
         }
-        class entrepos
+        public class entrepos
         {
             public ressource res;
 
@@ -417,7 +416,7 @@ namespace LesColons
                 res_max = new ressource(50, 50, 0, 0);
             }
         }
-        class gardeManger
+        public class gardeManger
         {
             public ressource res;
 
@@ -428,7 +427,7 @@ namespace LesColons
                 res_max = new ressource(0, 0, 0, 50);
             }
         }
-        class technologie
+        public class technologie
         {
             public double educationI;
             public bool educationI_bool;
@@ -451,7 +450,7 @@ namespace LesColons
                 habitationI_bool = false;
             }
         }
-        class ressource
+        public class ressource
         {
             public double bois;
             public double fer;
@@ -465,7 +464,7 @@ namespace LesColons
                 nouriture = n;
             }
         }
-        class magasin
+        public class magasin
         {
             public double prod_mag;
             public ressource res;
@@ -479,7 +478,7 @@ namespace LesColons
         }
         private void timer1_Tick(object sender, EventArgs e)
         {
-            
+
             if (plateau.res_base.nouriture < 0)
             {
                 plateau.pop--;
@@ -547,8 +546,8 @@ namespace LesColons
             if (plateau.res_base.or > plateau.res_max.or) plateau.res_base.or = plateau.res_max.or;
             if (plateau.res_base.bois > plateau.res_max.bois) plateau.res_base.bois = plateau.res_max.bois;
             if (plateau.res_base.fer > plateau.res_max.fer) plateau.res_base.fer = plateau.res_max.fer;
-            
-            
+
+
         }
 
         public double calcul_bonheur()
@@ -570,7 +569,7 @@ namespace LesColons
             label4.Text = "or : " + Convert.ToString(plateau.res_base.or);
             label2.Text = "Population : " + Convert.ToString(plateau.pop);
             label3.Text = "jour : " + Convert.ToString(plateau.date);
-            //label12.Text = "+" + Convert.ToString(plateau.prodTotalMine());
+            label13.Text = "+" + Convert.ToString(plateau.prodMagasin());
             label14.Text = "+" + Convert.ToString(plateau.prodTotalMine());
             label12.Text = "+" + Convert.ToString(plateau.prodTotalFerme() - plateau.pop);
             label17.Text = "prestige : " + Convert.ToString(plateau.prestige);
@@ -601,7 +600,20 @@ namespace LesColons
 
         private void button1_Click(object sender, EventArgs e)
         {
+            Form2 = new Form2(0);
+            Form2.Show();
+        }
 
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Form3 = new Form3();
+            Form3.Show();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            Form5 = new Form5(this);
+            Form5.Show();
         }
     }
 }
