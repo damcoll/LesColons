@@ -9,3 +9,4 @@ C:\Users\Administrateur\documents\visual studio 2015\Projects\LesColons\obj\Debu
 C:\Users\Administrateur\documents\visual studio 2015\Projects\LesColons\obj\Debug\LesColons.exe
 C:\Users\Administrateur\documents\visual studio 2015\Projects\LesColons\obj\Debug\LesColons.pdb
 C:\Users\Administrateur\documents\visual studio 2015\Projects\LesColons\obj\Debug\LesColons.Form3.resources
+C:\Users\Administrateur\documents\visual studio 2015\Projects\LesColons\obj\Debug\LesColons.Form4.resources

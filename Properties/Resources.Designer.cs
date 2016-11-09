@@ -123,6 +123,16 @@ namespace LesColons.Properties {
         /// <summary>
         ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap maison2 {
+            get {
+                object obj = ResourceManager.GetObject("maison2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap mine {
             get {
                 object obj = ResourceManager.GetObject("mine", resourceCulture);

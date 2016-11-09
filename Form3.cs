@@ -22,5 +22,21 @@ namespace LesColons
         {
             select = 1;
         }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+            select = 2;
+        }
+
+        private void label5_Click(object sender, EventArgs e)
+        {
+            select = 3;
+        }
+
+
+        private void label6_Click(object sender, EventArgs e)
+        {
+            select = 4;
+        }
     }
 }
