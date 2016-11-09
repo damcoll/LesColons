@@ -7,3 +7,6 @@ c:\users\administrateur\documents\visual studio 2015\Projects\LesColons\LesColon
 c:\users\administrateur\documents\visual studio 2015\Projects\LesColons\LesColons\bin\Debug\LesColons.pdb
 c:\users\administrateur\documents\visual studio 2015\Projects\LesColons\LesColons\obj\Debug\LesColons.exe
 c:\users\administrateur\documents\visual studio 2015\Projects\LesColons\LesColons\obj\Debug\LesColons.pdb
+C:\Users\Administrateur\Documents\Visual Studio 2015\Projects\LesColons\bin\Debug\LesColons.exe.config
+C:\Users\Administrateur\Documents\Visual Studio 2015\Projects\LesColons\obj\Debug\LesColons.exe
+C:\Users\Administrateur\Documents\Visual Studio 2015\Projects\LesColons\obj\Debug\LesColons.pdb
