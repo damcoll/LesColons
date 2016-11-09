@@ -10,13 +10,20 @@ using System.Windows.Forms;
 
 namespace LesColons
 {
+
     public partial class Form1 : Form
     {
         game plateau;
-        int select;
-        public Form1()
+        Form3 Form3;
+        public Form1(int co = 0)
         {
             InitializeComponent();
+
+            Form2 Form2 = new Form2(0);
+            Form2.Show();
+            Form3 = new Form3();
+            Form3.Show();
+            Form2.select = 0;
             plateau = new game();
             for (int i = 0; i < 100; i++)
             {
@@ -36,7 +43,6 @@ namespace LesColons
             label17.Text = "prestige : " + Convert.ToString(plateau.prestige);
             label16.Text = "+" + Convert.ToString(plateau.nataliter * plateau.pop);
             label15.Text = "+" + Convert.ToString(plateau.prodTotalScirie());
-            select = 0;
         }
 
         private void pictureBox2_Click(object sender, EventArgs e)
@@ -45,7 +51,7 @@ namespace LesColons
             {
                 if (sender.Equals(tableLayoutPanel1.Controls[i]))
                 {
-                    if (select == 1 && plateau.bois >= plateau.maison.bois)
+                    if (Form2.select == 1 && plateau.bois >= plateau.maison.bois)
                     {
                         plateau.bois -= plateau.maison.bois;
                         plateau.population_max += 3;
@@ -55,14 +61,14 @@ namespace LesColons
                         tableLayoutPanel1.Controls[i].BackgroundImage = LesColons.Properties.Resources.maison;
                         tableLayoutPanel1.Controls[i].BackgroundImageLayout = ImageLayout.Stretch;
                     }
-                    if (select == 2 && plateau.or >= plateau.route.or)
+                    if (Form2.select == 2 && plateau.or >= plateau.route.or)
                     {
                         plateau.or -= plateau.route.or;
                         plateau.tab[i] = 2;
                         tableLayoutPanel1.Controls[i].BackgroundImage = LesColons.Properties.Resources.route;
                         tableLayoutPanel1.Controls[i].BackgroundImageLayout = ImageLayout.Stretch;
                     }
-                    if (select == 3 && plateau.or >= plateau.ferme.or && plateau.bois >= plateau.ferme.bois)
+                    if (Form2.select == 3 && plateau.or >= plateau.ferme.or && plateau.bois >= plateau.ferme.bois)
                     {
                         plateau.or -= plateau.ferme.or;
                         plateau.bois -= plateau.ferme.bois;
@@ -71,7 +77,7 @@ namespace LesColons
                         tableLayoutPanel1.Controls[i].BackgroundImage = LesColons.Properties.Resources.ferme;
                         tableLayoutPanel1.Controls[i].BackgroundImageLayout = ImageLayout.Stretch;
                     }
-                    if (select == 4 && plateau.or >= plateau.mine.or && plateau.bois >= plateau.mine.bois)
+                    if (Form2.select == 4 && plateau.or >= plateau.mine.or && plateau.bois >= plateau.mine.bois)
                     {
                         plateau.or -= plateau.mine.or;
                         plateau.bois -= plateau.mine.bois;
@@ -80,7 +86,7 @@ namespace LesColons
                         tableLayoutPanel1.Controls[i].BackgroundImage = LesColons.Properties.Resources.mine;
                         tableLayoutPanel1.Controls[i].BackgroundImageLayout = ImageLayout.Stretch;
                     }
-                    if (select == 5 && plateau.or >= plateau.scierie.or && plateau.bois >= plateau.scierie.bois)
+                    if (Form2.select == 5 && plateau.or >= plateau.scierie.or && plateau.bois >= plateau.scierie.bois)
                     {
                         plateau.or -= plateau.scierie.or;
                         plateau.bois -= plateau.scierie.bois;
@@ -89,7 +95,7 @@ namespace LesColons
                         tableLayoutPanel1.Controls[i].BackgroundImage = LesColons.Properties.Resources.scirie;
                         tableLayoutPanel1.Controls[i].BackgroundImageLayout = ImageLayout.Zoom;
                     }
-                    if (select == 6 && plateau.or >= plateau.monu.or && plateau.bois >= plateau.monu.bois && plateau.fer >= plateau.monu.fer)
+                    if (Form2.select == 6 && plateau.or >= plateau.monu.or && plateau.bois >= plateau.monu.bois && plateau.fer >= plateau.monu.fer)
                     {
                         plateau.or -= plateau.monu.or;
                         plateau.bois -= plateau.monu.bois;
@@ -98,7 +104,7 @@ namespace LesColons
                         tableLayoutPanel1.Controls[i].BackgroundImage = LesColons.Properties.Resources.monument;
                         tableLayoutPanel1.Controls[i].BackgroundImageLayout = ImageLayout.Zoom;
                     }
-                    if (select == 7 && plateau.or >= plateau.ecole.or && plateau.bois >= plateau.ecole.bois && plateau.fer >= plateau.ecole.fer)
+                    if (Form2.select == 7 && plateau.or >= plateau.ecole.or && plateau.bois >= plateau.ecole.bois && plateau.fer >= plateau.ecole.fer)
                     {
                         plateau.or -= plateau.ecole.or;
                         plateau.technologie += plateau.prod_ecole;
@@ -108,7 +114,7 @@ namespace LesColons
                         tableLayoutPanel1.Controls[i].BackgroundImage = LesColons.Properties.Resources.ecole;
                         tableLayoutPanel1.Controls[i].BackgroundImageLayout = ImageLayout.Zoom;
                     }
-                    if (select == 8 && plateau.or >= plateau.entrepos.or && plateau.bois >= plateau.entrepos.bois && plateau.fer >= plateau.entrepos.fer)
+                    if (Form2.select == 8 && plateau.or >= plateau.entrepos.or && plateau.bois >= plateau.entrepos.bois && plateau.fer >= plateau.entrepos.fer)
                     {
                         plateau.or -= plateau.entrepos.or;
                         plateau.fer_max += plateau.entrepos.stock_fer;
@@ -119,7 +125,7 @@ namespace LesColons
                         tableLayoutPanel1.Controls[i].BackgroundImage = LesColons.Properties.Resources.entrepos;
                         tableLayoutPanel1.Controls[i].BackgroundImageLayout = ImageLayout.Zoom;
                     }
-                    if (select == 9 && plateau.or >= plateau.gardeManger.or && plateau.bois >= plateau.gardeManger.bois && plateau.fer >= plateau.gardeManger.fer)
+                    if (Form2.select == 9 && plateau.or >= plateau.gardeManger.or && plateau.bois >= plateau.gardeManger.bois && plateau.fer >= plateau.gardeManger.fer)
                     {
                         plateau.or -= plateau.gardeManger.or;
                         plateau.nour_max += plateau.gardeManger.stock_nour;
@@ -165,6 +171,7 @@ namespace LesColons
             public double nour_max;
             public double or_max;
 
+            public int technologie_select;
             public gardeManger gardeManger;
             public entrepos entrepos;
             public maison maison;
@@ -174,6 +181,7 @@ namespace LesColons
             public scierie scierie;
             public monument monu;
             public ecole ecole;
+            public technologie tech;
             double prod_ferme;
             double prod_mine;
             double prod_scirie;
@@ -199,6 +207,7 @@ namespace LesColons
                 fer_max = 100;
                 bois_max = 100;
                 nour_max = 100;
+                technologie_select = 0;
                 maison = new maison(10);
                 route = new route(10);
                 ferme = new ferme(10, 10, 1);
@@ -208,6 +217,7 @@ namespace LesColons
                 ecole = new ecole(20, 20, 20);
                 entrepos = new entrepos(10, 5, 10);
                 gardeManger = new gardeManger(10, 5, 10);
+                tech = new technologie();
             }
             public double prodTotalFerme()
             {
@@ -371,21 +381,16 @@ namespace LesColons
                 stock_nour = 50;
             }
         }
-
-        private void pictureBox1_Click(object sender, EventArgs e)
+        class technologie
         {
-            select = 1;
+            public double educationI;
+            
+            public technologie()
+            {
+                educationI = 0;
+            } 
         }
 
-        private void pictureBox102_Click(object sender, EventArgs e)
-        {
-            select = 0;
-        }
-
-        private void pictureBox103_Click(object sender, EventArgs e)
-        {
-            select = 2;
-        }
 
         private void timer1_Tick(object sender, EventArgs e)
         {
@@ -395,7 +400,7 @@ namespace LesColons
             plateau.nour += plateau.prodTotalFerme();
             plateau.pop += plateau.pop * plateau.nataliter;
             plateau.pop_dispo += plateau.pop * plateau.nataliter;
-            plateau.bonheur += calcul_bonheur(); 
+            plateau.bonheur += calcul_bonheur();
             if (plateau.nour < 0)
             {
                 plateau.pop--;
@@ -405,6 +410,7 @@ namespace LesColons
                 timer1.Stop();
                 MessageBox.Show("perdu");
             }
+            evolution_tech();
             if (plateau.nour > plateau.nour_max) plateau.nour = plateau.nour_max;
             if (plateau.or > plateau.or_max) plateau.or = plateau.or_max;
             if (plateau.bois > plateau.bois_max) plateau.bois = plateau.bois_max;
@@ -426,9 +432,15 @@ namespace LesColons
             label16.Text = "+" + Convert.ToString(plateau.nataliter * plateau.pop);
         }
 
+        public void evolution_tech()
+        {
+            if (plateau.tech.educationI == 10) Form3.label1.BackColor = Color.Blue;
+            if (Form3.select == 1) plateau.tech.educationI += plateau.technologie;
+        }
+
         public double calcul_bonheur()
         {
-            double indice = 1;
+            double indice = 0;
 
             if (plateau.population_max < plateau.pop) indice -= 1;
             else indice += 1;
@@ -437,40 +449,7 @@ namespace LesColons
             return indice * plateau.pop;
         }
 
-        private void pictureBox104_Click(object sender, EventArgs e)
-        {
-            select = 3;
-        }
 
-        private void pictureBox105_Click(object sender, EventArgs e)
-        {
-            select = 4;
-        }
-
-        private void pictureBox106_Click(object sender, EventArgs e)
-        {
-            select = 5;
-        }
-
-        private void pictureBox107_Click(object sender, EventArgs e)
-        {
-            select = 6;
-        }
-
-        private void pictureBox108_Click(object sender, EventArgs e)
-        {
-            select = 7;
-        }
-
-        private void pictureBox109_Click(object sender, EventArgs e)
-        {
-            select = 8;
-        }
-
-        private void pictureBox110_Click(object sender, EventArgs e)
-        {
-            select = 9;
-        }
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
