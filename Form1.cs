@@ -15,12 +15,13 @@ namespace LesColons
     {
         game plateau;
         Form3 Form3;
+        Form2 Form2;
         int cas_modifier;
         public Form1(int co = 0)
         {
             InitializeComponent();
 
-            Form2 Form2 = new Form2(0);
+            Form2 = new Form2(0);
             Form2.Show();
             Form3 = new Form3();
             Form3.Show();
@@ -52,7 +53,8 @@ namespace LesColons
                         if (Form2.select == 7) creeEcole(i);
                         if (Form2.select == 8) creeEntrepos(i);
                         if (Form2.select == 9) creeGardeManger(i);
-                       // if ()
+                        if (Form2.select == 11) creeMagasin(i);
+                        // if ()
                     }
                     else
                     {
@@ -66,7 +68,7 @@ namespace LesColons
                     }
                 }
             }
-
+            aff_res();
         }
 
         private void creeGardeManger(int i)
@@ -122,7 +124,7 @@ namespace LesColons
             if (plateau.tab[i] == 0 && compRes(plateau.res_base, plateau.scierie.res))
             {
                 sousRes(plateau.res_base, plateau.scierie.res);
-
+                plateau.pop_dispo -= 1;
                 plateau.tab[i] = 5;
                 tableLayoutPanel1.Controls[i].BackgroundImage = LesColons.Properties.Resources.scirie;
                 tableLayoutPanel1.Controls[i].BackgroundImageLayout = ImageLayout.Zoom;
@@ -135,6 +137,7 @@ namespace LesColons
             {
                 sousRes(plateau.res_base, plateau.mine.res);
                 plateau.tab[i] = 4;
+                plateau.pop_dispo -= 1;
                 tableLayoutPanel1.Controls[i].BackgroundImage = LesColons.Properties.Resources.mine;
                 tableLayoutPanel1.Controls[i].BackgroundImageLayout = ImageLayout.Zoom;
             }
@@ -146,6 +149,7 @@ namespace LesColons
             {
                 sousRes(plateau.res_base, plateau.ferme.res);
                 plateau.tab[i] = 3;
+                plateau.pop_dispo -= 1;
                 tableLayoutPanel1.Controls[i].BackgroundImage = LesColons.Properties.Resources.ferme;
                 tableLayoutPanel1.Controls[i].BackgroundImageLayout = ImageLayout.Zoom;
             }
@@ -172,6 +176,18 @@ namespace LesColons
                 plateau.pop_dispo += 1;
                 plateau.tab[i] = 1;
                 tableLayoutPanel1.Controls[i].BackgroundImage = LesColons.Properties.Resources.maison;
+                tableLayoutPanel1.Controls[i].BackgroundImageLayout = ImageLayout.Zoom;
+            }
+        }
+
+        private void creeMagasin(int i)
+        {
+            if (plateau.tab[i] == 0 && compRes(plateau.res_base, plateau.mag.res))
+            {
+                sousRes(plateau.res_base, plateau.mag.res);
+
+                plateau.tab[i] = 11;
+                tableLayoutPanel1.Controls[i].BackgroundImage = LesColons.Properties.Resources.magasin;
                 tableLayoutPanel1.Controls[i].BackgroundImageLayout = ImageLayout.Zoom;
             }
         }
@@ -214,7 +230,7 @@ namespace LesColons
             public ecole ecole;
             public technologie tech;
             public maison2 maison2;
-
+            public magasin mag;
 
 
             public ressource res_base;
@@ -234,6 +250,7 @@ namespace LesColons
                 bonheur = 0;
                 technologie = 0;
                 population_max = 0;
+                mag = new magasin(10, 5, 1);
                 res_base = new ressource(100, 100, 1000, 100);
                 res_max = new ressource(100, 100, 1000, 100);
                 maison = new maison(10);
@@ -257,8 +274,8 @@ namespace LesColons
                 }
                 if (pop_dispo < 0)
                 {
-
-                    return r * ferme.prod_ferme / (pop_dispo * (-2) * ferme.prod_ferme);
+                    if ((r * ferme.prod_ferme / (pop_dispo * -2 * ferme.prod_ferme) < 0))return 0;
+                    return r * ferme.prod_ferme / (pop_dispo * -2 * ferme.prod_ferme);
                 }
                 return r * ferme.prod_ferme;
             }
@@ -271,8 +288,8 @@ namespace LesColons
                 }
                 if (pop_dispo < 0)
                 {
-
-                    return r * mine.prod_mine / (pop_dispo * (-2) * mine.prod_mine);
+                    if (r * mine.prod_mine / (pop_dispo * -2 * mine.prod_mine) < 0)return 0 ;
+                    return r * mine.prod_mine / (pop_dispo * -2 * mine.prod_mine);
                 }
                 return r * mine.prod_mine;
             }
@@ -285,8 +302,8 @@ namespace LesColons
                 }
                 if (pop_dispo < 0)
                 {
-
-                    return r * scierie.prod_scirie / (pop_dispo * (-2) * scierie.prod_scirie);
+                    if (r * scierie.prod_scirie / (pop_dispo * -2 * scierie.prod_scirie) < 0) return 0;
+                    return r * scierie.prod_scirie / (pop_dispo * -2 * scierie.prod_scirie);
                 }
                 return r * scierie.prod_scirie;
             }
@@ -298,6 +315,15 @@ namespace LesColons
                     if (tab[i] == 6) r++;
                 }
                 return r;
+            }
+            public double prodMagasin()
+            {
+                int r = 0;
+                for (int i = 0; i < 100; i++)
+                {
+                    if (tab[i] == 11) r++;
+                }
+                return r * mag.prod_mag;
             }
         }
         class maison
@@ -439,7 +465,18 @@ namespace LesColons
                 nouriture = n;
             }
         }
-
+        class magasin
+        {
+            public double prod_mag;
+            public ressource res;
+            public double pop;
+            public magasin(double bois_prix, double or_prix, double popo)
+            {
+                res = new ressource(bois_prix, 0, or_prix, 0);
+                prod_mag = 0.5;
+                pop = popo;
+            }
+        }
         private void timer1_Tick(object sender, EventArgs e)
         {
             
@@ -468,6 +505,8 @@ namespace LesColons
             }
             if (plateau.tech.comerceI >= 10 && !plateau.tech.comerceI_bool)
             {
+                Form2.pictureBox3.Visible = true;
+                Form2.label1.Visible = true;
                 Form3.label3.BackColor = Color.Blue;
                 MessageBox.Show("technologie terminer");
                 Form3.select = 3;
@@ -503,11 +542,12 @@ namespace LesColons
             plateau.bonheur += calcul_bonheur();
             plateau.res_base.fer += plateau.prodTotalMine();
             plateau.res_base.bois += plateau.prodTotalScirie();
+            plateau.res_base.or += plateau.prodMagasin();
             if (plateau.res_base.nouriture > plateau.res_max.nouriture) plateau.res_base.nouriture = plateau.res_max.nouriture;
             if (plateau.res_base.or > plateau.res_max.or) plateau.res_base.or = plateau.res_max.or;
             if (plateau.res_base.bois > plateau.res_max.bois) plateau.res_base.bois = plateau.res_max.bois;
             if (plateau.res_base.fer > plateau.res_max.fer) plateau.res_base.fer = plateau.res_max.fer;
-            //plateau.or += plateau.prodTotalMine();
+            
             
         }
 
@@ -557,6 +597,11 @@ namespace LesColons
                     tableLayoutPanel1.Controls[cas_modifier].BackgroundImageLayout = ImageLayout.Stretch;
                 }
             }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

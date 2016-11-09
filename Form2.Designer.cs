@@ -29,10 +29,8 @@
         private void InitializeComponent()
         {
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
-            this.pictureBox110 = new System.Windows.Forms.PictureBox();
             this.label23 = new System.Windows.Forms.Label();
             this.label21 = new System.Windows.Forms.Label();
-            this.pictureBox109 = new System.Windows.Forms.PictureBox();
             this.label20 = new System.Windows.Forms.Label();
             this.label19 = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
@@ -40,8 +38,12 @@
             this.label9 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label5 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.pictureBox3 = new System.Windows.Forms.PictureBox();
+            this.pictureBox110 = new System.Windows.Forms.PictureBox();
+            this.pictureBox109 = new System.Windows.Forms.PictureBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pictureBox102 = new System.Windows.Forms.PictureBox();
             this.pictureBox103 = new System.Windows.Forms.PictureBox();
             this.pictureBox104 = new System.Windows.Forms.PictureBox();
@@ -49,9 +51,8 @@
             this.pictureBox106 = new System.Windows.Forms.PictureBox();
             this.pictureBox107 = new System.Windows.Forms.PictureBox();
             this.pictureBox108 = new System.Windows.Forms.PictureBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.tableLayoutPanel4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox110)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox109)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -62,7 +63,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox106)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox107)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox108)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel4
@@ -111,19 +111,6 @@
             this.tableLayoutPanel4.Size = new System.Drawing.Size(198, 593);
             this.tableLayoutPanel4.TabIndex = 3;
             // 
-            // pictureBox110
-            // 
-            this.pictureBox110.BackgroundImage = global::LesColons.Properties.Resources.gardeManger;
-            this.pictureBox110.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.pictureBox110.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox110.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pictureBox110.Location = new System.Drawing.Point(3, 493);
-            this.pictureBox110.Name = "pictureBox110";
-            this.pictureBox110.Size = new System.Drawing.Size(69, 43);
-            this.pictureBox110.TabIndex = 22;
-            this.pictureBox110.TabStop = false;
-            this.pictureBox110.Click += new System.EventHandler(this.pictureBox110_Click);
-            // 
             // label23
             // 
             this.label23.AutoSize = true;
@@ -145,19 +132,6 @@
             this.label21.TabIndex = 17;
             this.label21.Text = "entrepos";
             this.label21.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // pictureBox109
-            // 
-            this.pictureBox109.BackgroundImage = global::LesColons.Properties.Resources.entrepos;
-            this.pictureBox109.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.pictureBox109.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox109.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pictureBox109.Location = new System.Drawing.Point(3, 395);
-            this.pictureBox109.Name = "pictureBox109";
-            this.pictureBox109.Size = new System.Drawing.Size(69, 43);
-            this.pictureBox109.TabIndex = 16;
-            this.pictureBox109.TabStop = false;
-            this.pictureBox109.Click += new System.EventHandler(this.pictureBox109_Click);
             // 
             // label20
             // 
@@ -236,6 +210,69 @@
             this.label6.Text = "rien";
             this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label5.Location = new System.Drawing.Point(78, 0);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(117, 49);
+            this.label5.TabIndex = 1;
+            this.label5.Text = "maison";
+            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label1.Location = new System.Drawing.Point(78, 539);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(117, 54);
+            this.label1.TabIndex = 24;
+            this.label1.Text = "Magasin";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label1.Visible = false;
+            // 
+            // pictureBox3
+            // 
+            this.pictureBox3.BackgroundImage = global::LesColons.Properties.Resources.magasin;
+            this.pictureBox3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.pictureBox3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBox3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pictureBox3.Location = new System.Drawing.Point(3, 542);
+            this.pictureBox3.Name = "pictureBox3";
+            this.pictureBox3.Size = new System.Drawing.Size(69, 48);
+            this.pictureBox3.TabIndex = 25;
+            this.pictureBox3.TabStop = false;
+            this.pictureBox3.Visible = false;
+            this.pictureBox3.Click += new System.EventHandler(this.pictureBox3_Click);
+            // 
+            // pictureBox110
+            // 
+            this.pictureBox110.BackgroundImage = global::LesColons.Properties.Resources.gardeManger;
+            this.pictureBox110.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.pictureBox110.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBox110.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pictureBox110.Location = new System.Drawing.Point(3, 493);
+            this.pictureBox110.Name = "pictureBox110";
+            this.pictureBox110.Size = new System.Drawing.Size(69, 43);
+            this.pictureBox110.TabIndex = 22;
+            this.pictureBox110.TabStop = false;
+            this.pictureBox110.Click += new System.EventHandler(this.pictureBox110_Click);
+            // 
+            // pictureBox109
+            // 
+            this.pictureBox109.BackgroundImage = global::LesColons.Properties.Resources.entrepos;
+            this.pictureBox109.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.pictureBox109.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBox109.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pictureBox109.Location = new System.Drawing.Point(3, 395);
+            this.pictureBox109.Name = "pictureBox109";
+            this.pictureBox109.Size = new System.Drawing.Size(69, 43);
+            this.pictureBox109.TabIndex = 16;
+            this.pictureBox109.TabStop = false;
+            this.pictureBox109.Click += new System.EventHandler(this.pictureBox109_Click);
+            // 
             // pictureBox1
             // 
             this.pictureBox1.BackgroundImage = global::LesColons.Properties.Resources.maison;
@@ -248,17 +285,6 @@
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label5.Location = new System.Drawing.Point(78, 0);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(117, 49);
-            this.label5.TabIndex = 1;
-            this.label5.Text = "maison";
-            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // pictureBox102
             // 
@@ -349,29 +375,6 @@
             this.pictureBox108.TabStop = false;
             this.pictureBox108.Click += new System.EventHandler(this.pictureBox108_Click);
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label1.Location = new System.Drawing.Point(78, 539);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(117, 54);
-            this.label1.TabIndex = 24;
-            this.label1.Text = "Mairie";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // pictureBox3
-            // 
-            this.pictureBox3.BackgroundImage = global::LesColons.Properties.Resources.gardeManger;
-            this.pictureBox3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.pictureBox3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pictureBox3.Location = new System.Drawing.Point(3, 542);
-            this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(69, 48);
-            this.pictureBox3.TabIndex = 25;
-            this.pictureBox3.TabStop = false;
-            // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -383,6 +386,7 @@
             this.Load += new System.EventHandler(this.Form2_Load);
             this.tableLayoutPanel4.ResumeLayout(false);
             this.tableLayoutPanel4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox110)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox109)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
@@ -393,7 +397,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox106)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox107)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox108)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -421,7 +424,7 @@
         private System.Windows.Forms.PictureBox pictureBox106;
         private System.Windows.Forms.PictureBox pictureBox107;
         private System.Windows.Forms.PictureBox pictureBox108;
-        private System.Windows.Forms.PictureBox pictureBox3;
-        private System.Windows.Forms.Label label1;
+        public System.Windows.Forms.PictureBox pictureBox3;
+        internal System.Windows.Forms.Label label1;
     }
 }

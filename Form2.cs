@@ -74,5 +74,10 @@ namespace LesColons
         {
             select = 9;
         }
+
+        private void pictureBox3_Click(object sender, EventArgs e)
+        {
+            select = 11;
+        }
     }
 }
