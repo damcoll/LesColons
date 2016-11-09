@@ -7,12 +7,3 @@ c:\users\administrateur\documents\visual studio 2015\Projects\LesColons\LesColon
 c:\users\administrateur\documents\visual studio 2015\Projects\LesColons\LesColons\bin\Debug\LesColons.pdb
 c:\users\administrateur\documents\visual studio 2015\Projects\LesColons\LesColons\obj\Debug\LesColons.exe
 c:\users\administrateur\documents\visual studio 2015\Projects\LesColons\LesColons\obj\Debug\LesColons.pdb
-C:\Users\damien\Documents\Visual Studio 2015\Projects\LesColons\bin\Debug\LesColons.exe.config
-C:\Users\damien\Documents\Visual Studio 2015\Projects\LesColons\obj\Debug\LesColons.exe
-C:\Users\damien\Documents\Visual Studio 2015\Projects\LesColons\obj\Debug\LesColons.pdb
-C:\Users\damien\Documents\Visual Studio 2015\Projects\LesColons\bin\Debug\LesColons.exe
-C:\Users\damien\Documents\Visual Studio 2015\Projects\LesColons\bin\Debug\LesColons.pdb
-C:\Users\damien\Documents\Visual Studio 2015\Projects\LesColons\obj\Debug\LesColons.csprojResolveAssemblyReference.cache
-C:\Users\damien\Documents\Visual Studio 2015\Projects\LesColons\obj\Debug\LesColons.Form1.resources
-C:\Users\damien\Documents\Visual Studio 2015\Projects\LesColons\obj\Debug\LesColons.Properties.Resources.resources
-C:\Users\damien\Documents\Visual Studio 2015\Projects\LesColons\obj\Debug\LesColons.csproj.GenerateResource.Cache

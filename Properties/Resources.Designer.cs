@@ -63,39 +63,9 @@ namespace LesColons.Properties {
         /// <summary>
         ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap ecole {
-            get {
-                object obj = ResourceManager.GetObject("ecole", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap entrepos {
-            get {
-                object obj = ResourceManager.GetObject("entrepos", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap ferme {
             get {
                 object obj = ResourceManager.GetObject("ferme", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap gardeManger {
-            get {
-                object obj = ResourceManager.GetObject("gardeManger", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
